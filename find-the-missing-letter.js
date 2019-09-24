@@ -5,6 +5,7 @@ const findMissingLetter = array => {
             return String.fromCharCode(string.charCodeAt(i) + 1);
         }
     }
+    throw new Error("Invalid input")
 }
 
 console.log(findMissingLetter(['a','b','c','d','f']));
