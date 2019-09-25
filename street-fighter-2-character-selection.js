@@ -65,7 +65,7 @@
 
 // ['E.Honda', 'Chun Li', 'Ken', 'M.Bison', 'Sagat', 'Dhalsim', 'Sagat']
 
-function movement(position, moves, array) {
+function movement(position, moves, array, fighters) {
     moves.forEach(move => {
       switch (move) {
         case "up":
@@ -109,7 +109,7 @@ function movement(position, moves, array) {
   
   function streetFighterSelection(fighters, position, moves) {
     let scrolledFighters = [];
-    movement(position, moves, scrolledFighters);
+    movement(position, moves, scrolledFighters, fighters);
     return scrolledFighters;
   }
 
