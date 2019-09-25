@@ -19,3 +19,20 @@ const findMissingLetter = array => {
   }
   throw new Error("Invalid input");
 };
+
+// const findMissingLetter = array => {
+//   let charCodes = array.map((letter) => {
+//     return letter.charCodeAt(0);  
+//   });
+
+//   let missingThing;
+
+//   charCodes.forEach(code, index){
+//     if(index != 0){
+//       if((code != charCodes[index - 1]) + 1){
+//         missingThing = String.fromCharCode(code - 1);
+//       }
+//     }
+//   }
+//   return missingThing;
+// };
