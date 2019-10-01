@@ -65,57 +65,87 @@
 
 // ['E.Honda', 'Chun Li', 'Ken', 'M.Bison', 'Sagat', 'Dhalsim', 'Sagat']
 
-function movement(position, moves, array, fighters) {
-    moves.forEach(move => {
-      switch (move) {
-        case "up":
-              position[1] = position[1]-1;
-          withinBounds(position, fighters);
-          array.push(fighters[position[1]][position[0]]);
-          break;
-        case "down":
-            position[1] = position[1]+1;
-          withinBounds(position, fighters);
-          array.push(fighters[position[1]][position[0]]);
-          break;
-        case "left":
-              position[0] = position[0]-1;
-          withinBounds(position, fighters);
-          array.push(fighters[position[1]][position[0]]);
-          break;
-        case "right":
-              position[0] = position[0]+1;
-          withinBounds(position, fighters);
-          array.push(fighters[position[1]][position[0]]);
-          break;
-      }
-    });
+function withinBounds(arr1, arr2) {
+  if (arr1[0] > arr2[0].length - 1) {
+    arr1[0] = 0;
   }
-  
-  function withinBounds(arr1, arr2) {
-    if (arr1[0] > arr2[0].length-1) {
-      arr1[0] = 0;
-    }
-    if (arr1[0] < 0) {
-      arr1[0] = arr2[0].length-1;
-    }
-    if (arr1[1] < 0) {
-      arr1[1] = 0;
-    }
-    if (arr1[1] > 1) {
-      arr1[1] = 1;
-    }
+  if (arr1[0] < 0) {
+    arr1[0] = arr2[0].length - 1;
   }
-  
-  function streetFighterSelection(fighters, position, moves) {
-    let scrolledFighters = [];
-    movement(position, moves, scrolledFighters, fighters);
-    return scrolledFighters;
+  if (arr1[1] < 0) {
+    arr1[1] = 0;
   }
+  if (arr1[1] > 1) {
+    arr1[1] = 1;
+  }
+}
 
-  fighters = [
-    ["Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"],
-    ["Ken", "Chun Li", "Zangief", "Dhalsim", "Sagat", "M.Bison"]
-  ];
-  
-  moves = ["up", "left", "right", "left", "left"];
+function movement(coordinate, actions, selections, options) {
+  actions.forEach(move => {
+    switch (move) {
+      case "up":
+        coordinate[1] = coordinate[1] - 1;
+        withinBounds(coordinate, options);
+        selections.push(options[coordinate[1]][coordinate[0]]);
+        break;
+      case "down":
+        coordinate[1] = coordinate[1] + 1;
+        withinBounds(coordinate, options);
+        selections.push(options[coordinate[1]][coordinate[0]]);
+        break;
+      case "left":
+        coordinate[0] = coordinate[0] - 1;
+        withinBounds(coordinate, options);
+        selections.push(options[coordinate[1]][coordinate[0]]);
+        break;
+      case "right":
+        coordinate[0] = coordinate[0] + 1;
+        withinBounds(coordinate, options);
+        selections.push(options[coordinate[1]][coordinate[0]]);
+        break;
+    }
+  });
+}
+
+function streetFighterSelection(fighters, position, moves) {
+  let scrolledFighters = [];
+  movement(position, moves, scrolledFighters, fighters);
+  return scrolledFighters;
+}
+
+fighters = [
+  ["Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega"],
+  ["Ken", "Chun Li", "Zangief", "Dhalsim", "Sagat", "M.Bison"]
+];
+
+moves = ["up", "left", "right", "left", "left"];
+
+// function streetFighterSelection2(fighters, position, moves) {
+//   let row = position[0];
+//   let column = position[1];
+
+//   moves.forEach(move => {
+//     switch (move) {
+//       case "up":
+//         row = 0;
+//         break;
+//       case "down":
+//         row = 1;
+//         break;
+//       case "left":
+//         if (column === 0) {
+//           column = fighters[0].length - 1;
+//         } else {
+//           column -= 1;
+//         }
+//         break;
+//       case "right":
+//         if (column === fighters[row].length - 1) {
+//           column = 0;
+//         } else {
+//           column += 1;
+//         }
+//         break;
+//     }
+//   });
+// }
