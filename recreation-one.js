@@ -39,3 +39,38 @@ const listSquared = (m, n) => {
   }
   return result;
 };
+
+
+// lricoy solution:
+const cache = new Map();
+const square = x => x * x;
+const sum = (x, y) => x + y
+const isSquareDivisor = (x) => Math.sqrt(x) % 1 === 0;
+
+const findDivisors = n => {
+  if (cache.has(n)) return cache.get(n);
+  
+  const divisors = n === 1 ? [1] : [1, n];
+  
+  for (let i = 2; i < n; i++) {
+    if (n % i === 0)
+      divisors.push(i);
+  }
+  
+  cache.set(n, divisors);
+
+  return divisors;
+}
+
+function listSquared(m, n) {
+  const results = [];
+  for (let i=m; i <=n; i++) {
+    const divisors = findDivisors(i)
+    const squared = divisors.map(square)
+    const summed = squared.reduce(sum, 0)
+    if (isSquareDivisor(summed)) {
+      results.push([i, summed])
+    }
+  }
+  return results;
+}
